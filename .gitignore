@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+parent/parent.iml
+parent/target
+core/target
+core/core.iml
+mgrsite/mgrsite.iml
+mgrsite/target
+website/website.iml
+website/target
+myp2p.iml
