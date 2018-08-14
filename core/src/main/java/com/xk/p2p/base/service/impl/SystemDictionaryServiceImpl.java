@@ -35,4 +35,13 @@ public class SystemDictionaryServiceImpl implements ISystemDictionaryService {
             return PageResult.empty(qo.getPageSize());
         }
     }
+
+    @Override
+    public void saveOrUpdateDic(SystemDictionary dic) {
+        if (dic.getId() == null){
+            this.dictionaryMapper.insert(dic);
+        }else {
+            this.dictionaryMapper.updateByPrimaryKey(dic);
+        }
+    }
 }

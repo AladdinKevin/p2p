@@ -9,12 +9,12 @@ public class SomeTest {
 
     @Test
     public void testStartWith(){
-        String a = "89860012016040000001";
-        String startStr = "898600120";
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("a").append(",").append("b").append(",");
-//        System.out.println(sb.substring(0,sb.length()-1));
-        System.out.println(a.substring(startStr.length(),a.length()));
+       // String a = "89860012016040000001";
+       // String startStr = "898600120";
+       // System.out.println(a.substring(startStr.length(),a.length()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("a").append(",").append("b").append(",");
+        System.out.println(sb.substring(0,sb.length()-1));
     }
 
     @Test

@@ -27,6 +27,29 @@
 				$("#searchForm").submit();
             }
 		});
+		$("#addSystemDictionaryBtn").click(function(){
+		    //清除可能会由于点击修改而带来的缓存问题
+		    $("#editForm")[0].reset();
+		    $("#systemDictionaryId").val("");//清除隐藏标签的值
+		    $("#systemDictionaryModal").modal("show");
+		});
+
+		$("#saveBtn").click(function () {
+			$("#editForm").ajaxSubmit({
+				success:function (data) {
+					$("#currentPage").val(1);
+					$("#searchForm").submit();
+                }
+			});
+        });
+
+		$(".edit_Btn").click(function () {
+			var json = $(this).data("json");
+			$("#systemDictionaryId").val(json.id);
+			$("#sn").val(json.sn);
+			$("#title").val(json.title);
+            $("#systemDictionaryModal").modal("show");
+        });
 	});
 	</script>
 </head>
@@ -74,7 +97,7 @@
 								<td>${vo.title}</td>
 								<td>${vo.sn}</td>
 								<td>
-									<a href="javascript:void(-1);" class="edit_Btn">修改</a>
+									<a href="javascript:void(-1);" class="edit_Btn" data-json='${vo.jsonString}'>修改</a>
 								</td>
 							</tr>
 						</#list>
