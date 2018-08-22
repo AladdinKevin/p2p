@@ -77,7 +77,7 @@
 									</tr>
 								</thead>
 								<tbody>
-								<#list pageResult.listData as vo>
+								<#list pageResult.result as vo>
 									<tr>
 										<td>${vo.title}</td>
 										<td>${vo.sequence!""}</td>

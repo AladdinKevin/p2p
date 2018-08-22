@@ -2,6 +2,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.xk.p2p.base.domain.Logininfo;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by admin on 2018/6/21.
  */
@@ -37,6 +40,12 @@ public class SomeTest {
         System.out.println(object.toString());
     }
 
-
+    @Test
+    public void test1(){
+        Map<String,Object> map = new HashMap<>();
+        map.put("1",1);
+        map.put("2",2);
+        System.out.println(map.containsKey("1"));
+    }
 
 }

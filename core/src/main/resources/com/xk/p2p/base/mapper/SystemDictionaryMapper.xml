@@ -45,4 +45,9 @@
     <include refid="base_where"/>
     LIMIT #{start},#{pageSize}
   </select>
+
+  <select id="queryDicsListAll" resultMap="BaseResultMap">
+    SELECT * FROM systemDictionary
+  </select>
+
 </mapper>

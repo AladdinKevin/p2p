@@ -24,10 +24,36 @@
       sequence = #{sequence,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <sql id="base_clumn">
+    id, parentId, title, sequence
+  </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap">
-    select id, parentId, title, sequence
+    select <include refid="base_clumn"/>
     from `systemDictionaryItem`
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <sql id="base_where">
+    <where>
+      <if test="parentId != null">
+        AND parentId = #{parentId}
+      </if>
+      <if test="keyword != null">
+        AND (title LIKE concat('%',#{keyword},'%'))
+      </if>
+    </where>
+  </sql>
+
+  <select id="queryForCount" resultType="int">
+    SELECT COUNT(id) FROM systemDictionaryItem
+    <include refid="base_where"/>
+  </select>
+
+  <select id="query" resultMap="BaseResultMap">
+    SELECT <include refid="base_clumn"/>
+    FROM systemDictionaryItem
+    <include refid="base_where"/>
+    LIMIT #{start},#{pageSize}
+  </select>
 </mapper>

@@ -18,4 +18,5 @@ public interface SystemDictionaryMapper {
 
     List<SystemDictionary> query(SystemDictionaryQueryObject qo);
 
+    List<SystemDictionary> queryDicsListAll();
 }

@@ -2,6 +2,7 @@ package com.xk.p2p.base.service.impl;
 
 import com.sun.org.apache.xerces.internal.xs.LSInputList;
 import com.xk.p2p.base.domain.SystemDictionary;
+import com.xk.p2p.base.domain.SystemDictionaryItem;
 import com.xk.p2p.base.mapper.SystemDictionaryItemMapper;
 import com.xk.p2p.base.mapper.SystemDictionaryMapper;
 import com.xk.p2p.base.query.PageResult;
@@ -19,7 +20,8 @@ import java.util.List;
 public class SystemDictionaryServiceImpl implements ISystemDictionaryService {
     @Autowired
     private SystemDictionaryMapper dictionaryMapper;
-
+    @Autowired
+    private SystemDictionaryItemMapper itemMapper;
     /**
      * 数据字典的高级查询+分页
      * @param qo
@@ -43,5 +45,21 @@ public class SystemDictionaryServiceImpl implements ISystemDictionaryService {
         }else {
             this.dictionaryMapper.updateByPrimaryKey(dic);
         }
+    }
+
+    @Override
+    public PageResult queryDicItems(SystemDictionaryQueryObject qo) {
+        int count = this.itemMapper.queryForCount(qo);
+        if (count > 0){
+            List<SystemDictionary> list = this.itemMapper.query(qo);
+            return new PageResult(list,count,qo.getCurrentPage(),qo.getPageSize());
+        }else {
+            return PageResult.empty(qo.getPageSize());
+        }
+    }
+
+    @Override
+    public List<SystemDictionary> queryDicsListAll() {
+        return this.dictionaryMapper.queryDicsListAll();
     }
 }

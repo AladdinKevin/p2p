@@ -34,4 +34,16 @@ public class SystemDictionaryController {
         this.dictionaryService.saveOrUpdateDic(dic);
         return new AjaxResult(true);
     }
+
+    /**
+     * 数据字典明细
+     */
+    @RequestMapping("systemDictionaryItem_list")
+    @RequiredLogin
+    public String listDicItems(@ModelAttribute("qo")SystemDictionaryQueryObject qo, Model model){
+        model.addAttribute("pageResult",this.dictionaryService.queryDicItems(qo));
+        model.addAttribute("systemDictionaryGroups",this.dictionaryService.queryDicsListAll());
+        return "systemdic/systemDictionaryItem_list";
+    }
+
 }
