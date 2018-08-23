@@ -40,7 +40,7 @@
         AND parentId = #{parentId}
       </if>
       <if test="keyword != null">
-        AND (title LIKE concat('%',#{keyword},'%'))
+        AND title LIKE CONCAT('%',#{keyword},'%')
       </if>
     </where>
   </sql>
