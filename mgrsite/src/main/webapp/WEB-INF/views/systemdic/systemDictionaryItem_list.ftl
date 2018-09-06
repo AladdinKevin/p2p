@@ -24,7 +24,55 @@
 					$("#searchForm").submit();
 				}
 			});
-						
+
+		//左侧数据字典栏选中后动作
+			$(".group_item").click(function () {
+				$("#parentId").val($(this).data("dataid"));
+				$("#currentPage").val(1);
+				$("#searchForm").submit();
+            });
+
+			//回显所选数据字典
+			var parentId = $("#parentId").val();
+			if (parentId){
+			    //(明细的parentId就是每一个Group的id)
+				//找到data-dataid值为parentId值的a标签的最近的li标签,给其添加active属性
+			    $("a[data-dataid="+parentId+"]").closest("li").addClass("active");
+			}
+
+			//添加数据字典明细按钮动作
+			$("#addSystemDictionaryItemBtn").click(function () {
+			    if (parentId){
+                    //清除可能会由于点击修改而带来的缓存问题
+                    $("#editForm")[0].reset();
+                    //清除隐藏标签的值
+                    $("#systemDictionaryItemId").val("");
+                    $("#editFormParentId").val(parentId);
+                    $("#systemDictionaryItemModal").modal("show");
+                }else {
+					$.messager.popup("请先选中某一数据字典分组~");
+                }
+            });
+
+			//保存
+			$("#saveBtn").click(function () {
+				$("#editForm").ajaxSubmit({
+					success:function (data) {
+                        $("#currentPage").val(1);
+                        $("#searchForm").submit();
+                    }
+				});
+            });
+
+			//修改
+			$(".edit_Btn").click(function () {
+				var json = $(this).data("json");
+                $("#systemDictionaryItemId").val(json.id);
+                $("#editFormParentId").val(json.parentId);
+                $("#title").val(json.title);
+                $("#sequence").val(json.sequence);
+                $("#systemDictionaryItemModal").modal("show");
+            });
 		});
 		</script>
 </head>
@@ -82,7 +130,7 @@
 										<td>${vo.title}</td>
 										<td>${vo.sequence!""}</td>
 										<td>
-											<a href="javascript:void(-1);" class="edit_Btn">修改</a> &nbsp; 
+											<a href="javascript:void(-1);" class="edit_Btn" data-json='${vo.jsonString}'>修改</a> &nbsp;
 										</td>
 									</tr>
 								</#list>
@@ -109,7 +157,7 @@
 	      </div>
 	      <div class="modal-body">
 	       	  <form id="editForm" class="form-horizontal" method="post" action="systemDictionaryItem_update.do" style="margin: -3px 118px">
-				    <input id="systemDictionaryId" type="hidden" name="id" value="" />
+				    <input id="systemDictionaryItemId" type="hidden" name="id" value="" />
 			    	<input type="hidden" id="editFormParentId" name="parentId" value="" />
 				   	<div class="form-group">
 					    <label class="col-sm-3 control-label">名称</label>

@@ -1,6 +1,7 @@
 package com.xk.p2p.base.service;
 
 import com.xk.p2p.base.domain.SystemDictionary;
+import com.xk.p2p.base.domain.SystemDictionaryItem;
 import com.xk.p2p.base.query.PageResult;
 import com.xk.p2p.base.query.SystemDictionaryQueryObject;
 
@@ -36,4 +37,10 @@ public interface ISystemDictionaryService {
      * @return
      */
     List<SystemDictionary> queryDicsListAll();
+
+    /**
+     * 保存或修改数据字典明细
+     * @param item
+     */
+    void saveOrUpdateDicItem(SystemDictionaryItem item);
 }

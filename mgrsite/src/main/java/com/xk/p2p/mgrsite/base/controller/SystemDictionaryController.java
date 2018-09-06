@@ -1,6 +1,7 @@
 package com.xk.p2p.mgrsite.base.controller;
 
 import com.xk.p2p.base.domain.SystemDictionary;
+import com.xk.p2p.base.domain.SystemDictionaryItem;
 import com.xk.p2p.base.query.SystemDictionaryQueryObject;
 import com.xk.p2p.base.service.ISystemDictionaryService;
 import com.xk.p2p.base.util.AjaxResult;
@@ -44,6 +45,16 @@ public class SystemDictionaryController {
         model.addAttribute("pageResult",this.dictionaryService.queryDicItems(qo));
         model.addAttribute("systemDictionaryGroups",this.dictionaryService.queryDicsListAll());
         return "systemdic/systemDictionaryItem_list";
+    }
+
+    /**
+     * 添加/修改数据字典明细
+     */
+    @RequestMapping("systemDictionaryItem_update")
+    @ResponseBody
+    public AjaxResult updateItems(SystemDictionaryItem item){
+        this.dictionaryService.saveOrUpdateDicItem(item);
+        return new AjaxResult(true);
     }
 
 }

@@ -62,4 +62,13 @@ public class SystemDictionaryServiceImpl implements ISystemDictionaryService {
     public List<SystemDictionary> queryDicsListAll() {
         return this.dictionaryMapper.queryDicsListAll();
     }
+
+    @Override
+    public void saveOrUpdateDicItem(SystemDictionaryItem item) {
+        if (item.getId() != null){
+            this.itemMapper.updateByPrimaryKey(item);
+        }else {
+            this.itemMapper.insert(item);
+        }
+    }
 }
